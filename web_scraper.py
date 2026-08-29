@@ -14,11 +14,12 @@ def find_jobs():
         job_title = job.find('h2', class_ = 'title is-5').text
         publish_date = job.find('p', class_ = 'is-small has-text-grey').text.strip()
         apply_link = job.footer.find_all('a')[1]['href'] # hypertext reference
-        with open(f'python_job_postings/{index}', 'w') as f:
-            f.write(f'Company Name: {company_name} \n')
-            f.write(f'Job Title: {job_title} \n')
-            f.write(f'Publish Date: {publish_date} \n')
-            f.write(f'Apply Link: {apply_link}')
+
+        with open(f'python_job_postings/{index}.txt', 'w') as file:
+            file.write(f'Company Name: {company_name} \n')
+            file.write(f'Job Title: {job_title} \n')
+            file.write(f'Publish Date: {publish_date} \n')
+            file.write(f'Apply Link: {apply_link}')
 
         print(' ')
 
