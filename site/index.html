@@ -83,7 +83,7 @@ pip install lxml
 <p>The main purpose of <strong>BeautifulSoup</strong> is to parse HTML and XML files so developers can easily extract, navigate and clean data from web pages, and the primary purpose of the Python <strong>Requests library</strong> is to send HTTP requests and interact with web resources in a simple and human-friendly way.</p>
 <p><u>What is the purpose of LXML and the functions of LXML?</u> </p>
 <p>The <strong>LXML Library</strong> provides python Web Scraper with an ultra fast, reliable engine to read, clean and search through HTML and XML web pages. We use it for web scraping because of its high speed, since it is written in the <strong>C Programming Language</strong>, this makes it much faster than pythons built in HTML parser. It fixes broken code, meaning that real world websites either have messy and broken HTML, with the LXML library it automatically repairs these errors so your scraper does not crash.</p>
-<h3 id="step-2-using-the-request-library-to-view-a-websites-html">Step 2: Using the request library to view a websites HTML</h3>
+<h3 id="step-2-using-the-request-library-to-view-a-websites-html"><strong>Step 2: Using the request library to view a websites HTML</strong></h3>
 <p>Firstly what we need to do is import <strong>BeautifulSoup and Requests Library</strong></p>
 <pre><code>import bs4 from BeautifulSoup
 import requests
@@ -105,7 +105,7 @@ import requests
 html_text = requests.get('https://realpython.github.io/fake-jobs/').text 
 soup = BeautifulSoup(html_text, 'lxml')
 </code></pre>
-<h3 id="step-3">Step 3:</h3>
+<h3 id="step-3-search-and-store-job-postings"><strong>Step 3: Search and Store job postings</strong></h3>
 <p>This line searches the parsed soup object for all <code>&lt;div&gt;</code> elements containing the CSS class card-content and stores them as a list in the jobs variable. By isolating these specific HTML containers, it extracts every individual job post card from the page so they can be iterated over and parsed individually in subsequent code steps, where it will be discussed in the next step of this tutorial.</p>
 <pre><code>import bs4 from BeautifulSoup
 import requests
@@ -120,7 +120,7 @@ Hover over the job posting with your mouse and right-click and inspect.</p>
 <p><img alt="Card Example Screenshot" src="images/card_example.png" /></p>
 <p>Once you have done that, navigate to the <code>&lt;div&gt;</code> element containing the CSS card-content and stores all the information as a list in the jobs variable. This information includes company name, job title, apply link and publish date. Unfortunately all the publish dates are the same, but this is still a good example for local testing and practice. </p>
 <p><img alt="Card Content Screenshot" src="images/card_content.png" /></p>
-<h3 id="step-4-iterate-through-job-postings">Step 4: iterate through job postings</h3>
+<h3 id="step-4-iterate-through-job-postings"><strong>Step 4: iterate through job postings</strong></h3>
 <p>We need to loop through each individual job within many jobs, hence the webpage. Like i said earlier we need to extract the company name, job title, apply link and publish date.</p>
 <p>Within in the previous step we hovered over an empty space on the job posting (<code>&lt;div&gt;</code> element). However this time around right-click inspect the company name, job title, apply link and publish date to retreive the header and the class.</p>
 <p>To target the "Apply" link specifically, the script navigates into the job card's <code>&lt;footer&gt;</code> element, where both action links reside. Because each card contains two structurally identical anchor tags, a standard search defaults to the first link ("Learn"). Using <code>.find_all('a')</code> collects all <code>&lt;a&gt;</code> (anchor) tags into a list, enabling zero-based indexing (<code>[1]</code>) to isolate the second element representing the "Apply" button. Finally, querying the <code>['href']</code> key extracts the Hypertext Reference attribute value, capturing the exact target URL needed for downstream parsing.</p>
@@ -140,7 +140,7 @@ for job in jobs:
     publish_date = job.find('p', class_ = 'is-small has-text-grey').text.strip() # strip method removes any blank spaces within a string.
     apply_link = job.footer.find_all('a')[1]['href']
 </code></pre>
-<h3 id="step-5-storing-our-data-and-writing-it-to-a-text-file">Step 5: Storing our data and writing it to a text-file</h3>
+<h3 id="step-5-storing-our-data-and-writing-it-to-a-text-file"><strong>Step 5: Storing our data and writing it to a text-file</strong></h3>
 <p>To organize our output, each job posting is saved as an individual text file in a dedicated directory (python_job_postings/). Including the trailing forward slash directs Python to write inside that specific subfolder (/).</p>
 <p>Instead of manually tracking a loop counter, we leverage enumerate() in our loop to supply an automatic zero-based index variable.</p>
 <p>By embedding {index}.txt directly into the relative file path inside with open(), Python dynamically names each file sequentially (0.txt, 1.txt, 2.txt, and so forth). Using the with context manager ensures each file automatically closes after writing, preventing memory leaks or corrupted files.</p>
@@ -158,7 +158,7 @@ for job in jobs:
 
     print(' ') # Add a space between our outputs to make it neater
 </code></pre>
-<h3 id="step-6-add-a-programme-feature-timer">Step 6: Add a programme feature (Timer)</h3>
+<h3 id="step-6-add-a-programme-feature-timer"><strong>Step 6: Add a programme feature (Timer)</strong></h3>
 <p>The last step is to wrap this block of code into a function called find_jobs(), so that we are able to call it anywhere in the source code.</p>
 <p>This block serves as the main entry point for the script, establishing a continuous loop to automate periodic web scraping. The <code>if __name__ == '__main__':</code> guard ensures the code executes only when the script is run directly, preventing execution if it is imported into another file as a module. Inside the infinite <code>while True</code> loop, the program calls <code>find_jobs()</code> to scrape current listings, logs a status update to the console, and then uses <code>time.sleep(time_wait * 60)</code> to delay execution for 10 minutes (600 seconds) before automatically repeating the process.</p>
 <pre><code>def find_jobs():
@@ -264,5 +264,5 @@ while True:
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-08-31 08:59:19.959063+00:00
+Build Date UTC : 2026-08-31 09:25:37.706722+00:00
 -->

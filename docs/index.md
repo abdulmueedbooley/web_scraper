@@ -26,7 +26,7 @@ The main purpose of **BeautifulSoup** is to parse HTML and XML files so develope
 The **LXML Library** provides python Web Scraper with an ultra fast, reliable engine to read, clean and search through HTML and XML web pages. We use it for web scraping because of its high speed, since it is written in the **C Programming Language**, this makes it much faster than pythons built in HTML parser. It fixes broken code, meaning that real world websites either have messy and broken HTML, with the LXML library it automatically repairs these errors so your scraper does not crash.
 
 
-### Step 2: Using the request library to view a websites HTML
+### **Step 2: Using the request library to view a websites HTML**
 
 Firstly what we need to do is import **BeautifulSoup and Requests Library**
     
