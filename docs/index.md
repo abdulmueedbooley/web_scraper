@@ -4,7 +4,7 @@
 
 ## Project Summary
 Within this tutorial i will be guiding you step-by-step on how to create a basic Web Scraping Programme using python.
-The Website that we will be using in this tutorial is <https://realpython.github.io/fake-jobs/>. This website was specifically designed for learning BeautifuSoup. Every job title, company name, location and data is structured in clear, predictable HTML tags. 
+The Website that we will be using in this tutorial is <https://realpython.github.io/fake-jobs/>. This website was specifically designed for learning BeautifulSoup. Every job title, company name, location and data is structured in clear, predictable HTML tags. 
 
 So our goal is to filter out job applications under "Python", while extracting specific information from the job posting. 
 Unironically using Python to find Python developer jobs. ;)
