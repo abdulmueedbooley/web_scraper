@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Abdul - Mu'eed Booley</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">Abdul - Mu'eed Booley</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#how-to-make-a-basic-web-scraping-programme-using-beautiful-soup" class="nav-link">How to make a basic web scraping programme using Beautiful Soup</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#project-summary" class="nav-link">Project Summary</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="how-to-make-a-basic-web-scraping-programme-using-beautiful-soup">How to make a basic web scraping programme using Beautiful Soup</h1>
+<p><br></p>
+<h2 id="project-summary">Project Summary</h2>
+<p>Within this tutorial i will be guiding you step-by-step on how to create a basic Web Scraping Programme using python.
+The Website that we will be using in this tutorial is <a href="https://realpython.github.io/fake-jobs/">https://realpython.github.io/fake-jobs/</a>. This website was specifically designed for learning BeautifuSoup. Every job title, company name, location and data is structured in clear, predictable HTML tags. </p>
+<p>So our goal is to filter out job applications under "Python", while extracting specific information from the job posting. 
+Unironically using Python to find Python developer jobs. ;)</p>
+<h3 id="step-1-installing-beautifulsoup-and-using-the-request-library-to-see-a-websites-html"><strong>Step 1: Installing BeautifulSoup and using the request library to see a Websites HTML</strong></h3>
+<p>Firstly we need to install BeautifulSoup,requests library and lxml.</p>
+<pre><code>pip install beautifulsoup4
+pip install requests
+pip install lxml
+</code></pre>
+<p><u>Why do we need the BeautifulSoup and the request library installed?</u></p>
+<p>The main purpose of <strong>BeautifulSoup</strong> is to parse HTML and XML files so developers can easily extract, navigate and clean data from web pages, and the primary purpose of the Python <strong>Requests library</strong> is to send HTTP requests and interact with web resources in a simple and human-friendly way.</p>
+<p><u>What is the purpose of LXML and the functions of LXML?</u> </p>
+<p>The <strong>LXML Library</strong> provides python Web Scraper with an ultra fast, reliable engine to read, clean and search through HTML and XML web pages. We use it for web scraping because of its high speed, since it is written in the <strong>C Programming Language</strong>, this makes it much faster than pythons built in HTML parser. It fixes broken code, meaning that real world websites either have messy and broken HTML, with the LXML library it automatically repairs these errors so your scraper does not crash.</p>
+<h3 id="step-2-using-the-request-library-to-view-a-websites-html">Step 2: Using the request library to view a websites HTML</h3>
+<p>Firstly what we need to do is import <strong>BeautifulSoup and Requests Library</strong></p>
+<pre><code>import bs4 from BeautifulSoup
+import requests
+</code></pre>
+<p>Sends an HTTP GET request to the target URL using the requests library, decodes the server's response into a text string via .text, and assigns the HTML content to the html_text variable.
+For testing and debugging purposes to see if the programme works, print out the variable.</p>
+<pre><code>import bs4 from BeautifulSoup
+import requests
+
+html_text = requests.get('https://realpython.github.io/fake-jobs/').text 
+print(html_text)
+</code></pre>
+<p>After running your programme you should be able to see HTML running for a while in your terminal.
+<img alt="Html Example Screenshot" src="images/html_example.png" /></p>
+<p>This step initializes a <code>BeautifulSoup</code> object by passing the raw HTML string (<code>html_text</code>) through the high-performance <code>lxml</code> parser engine. It converts the unstructured text into a structured document object tree stored in the <code>soup</code> variable, enabling programmatic searching, traversal, and data extraction using methods like <code>.find()</code> and <code>.find_all()</code>.</p>
+<pre><code>import bs4 from BeautifulSoup
+import requests
+
+html_text = requests.get('https://realpython.github.io/fake-jobs/').text 
+soup = BeautifulSoup(html_text, 'lxml')
+</code></pre>
+<h3 id="step-3">Step 3:</h3>
+<p>This line searches the parsed soup object for all <code>&lt;div&gt;</code> elements containing the CSS class card-content and stores them as a list in the jobs variable. By isolating these specific HTML containers, it extracts every individual job post card from the page so they can be iterated over and parsed individually in subsequent code steps, where it will be discussed in the next step of this tutorial.</p>
+<pre><code>import bs4 from BeautifulSoup
+import requests
+
+html_text = requests.get('https://realpython.github.io/fake-jobs/').text 
+soup = BeautifulSoup(html_text, 'lxml')
+
+jobs = soup.find_all("div", class_ = "card-content")
+</code></pre>
+<p>In order to access this information we need to navigate onto our website 'https://realpython.github.io/fake-jobs/'.
+Hover over the job posting with your mouse and right-click and inspect.</p>
+<p><img alt="Card Example Screenshot" src="images/card_example.png" /></p>
+<p>Once you have done that, navigate to the <code>&lt;div&gt;</code> element containing the CSS card-content and stores all the information as a list in the jobs variable. This information includes company name, job title, apply link and publish date. Unfortunately all the publish dates are the same, but this is still a good example for local testing and practice. </p>
+<p><img alt="Card Content Screenshot" src="images/card_content.png" /></p>
+<h3 id="step-4-iterate-through-job-postings">Step 4: iterate through job postings</h3>
+<p>We need to loop through each individual job within many jobs, hence the webpage. Like i said earlier we need to extract the company name, job title, apply link and publish date.</p>
+<p>Within in the previous step we hovered over an empty space on the job posting (<code>&lt;div&gt;</code> element). However this time around right-click inspect the company name, job title, apply link and publish date to retreive the header and the class.</p>
+<p>To target the "Apply" link specifically, the script navigates into the job card's <code>&lt;footer&gt;</code> element, where both action links reside. Because each card contains two structurally identical anchor tags, a standard search defaults to the first link ("Learn"). Using <code>.find_all('a')</code> collects all <code>&lt;a&gt;</code> (anchor) tags into a list, enabling zero-based indexing (<code>[1]</code>) to isolate the second element representing the "Apply" button. Finally, querying the <code>['href']</code> key extracts the Hypertext Reference attribute value, capturing the exact target URL needed for downstream parsing.</p>
+<p><strong>EXAMPLE: complete this for job title and publish date</strong></p>
+<p><img alt="Loop Example Screenshot" src="images/loop_example.png" /></p>
+<pre><code>import bs4 from BeautifulSoup
+import requests
+
+html_text = requests.get('https://realpython.github.io/fake-jobs/').text 
+soup = BeautifulSoup(html_text, 'lxml')
+
+jobs = soup.find_all("div", class_ = "card-content")
+
+for job in jobs:
+    company_name = job.find('h3', class_ = 'subtitle is-6 company').text
+    job_title = job.find('h2', class_ = 'title is-5').text
+    publish_date = job.find('p', class_ = 'is-small has-text-grey').text.strip() # strip method removes any blank spaces within a string.
+    apply_link = job.footer.find_all('a')[1]['href']
+</code></pre>
+<h3 id="step-5-storing-our-data-and-writing-it-to-a-text-file">Step 5: Storing our data and writing it to a text-file</h3>
+<p>To organize our output, each job posting is saved as an individual text file in a dedicated directory (python_job_postings/). Including the trailing forward slash directs Python to write inside that specific subfolder (/).</p>
+<p>Instead of manually tracking a loop counter, we leverage enumerate() in our loop to supply an automatic zero-based index variable.</p>
+<p>By embedding {index}.txt directly into the relative file path inside with open(), Python dynamically names each file sequentially (0.txt, 1.txt, 2.txt, and so forth). Using the with context manager ensures each file automatically closes after writing, preventing memory leaks or corrupted files.</p>
+<pre><code>for index,job in enumerate(jobs):
+    company_name = job.find('h3', class_ = 'subtitle is-6 company').text
+    job_title = job.find('h2', class_ = 'title is-5').text
+    publish_date = job.find('p', class_ = 'is-small has-text-grey').text.strip() # strip method removes any blank spaces within a string.
+    apply_link = job.footer.find_all('a')[1]['href']
+
+    with open(f'python_job_postings/{index}.txt', 'w') as file:
+        file.write(f'Company Name: {company_name} \n')
+        file.write(f'Job Title: {job_title} \n')
+        file.write(f'Publish Date: {publish_date} \n')
+        file.write(f'Apply Link: {apply_link}')
+
+    print(' ') # Add a space between our outputs to make it neater
+</code></pre>
+<h3 id="step-6-add-a-programme-feature-timer">Step 6: Add a programme feature (Timer)</h3>
+<p>The last step is to wrap this block of code into a function called find_jobs(), so that we are able to call it anywhere in the source code.</p>
+<p>This block serves as the main entry point for the script, establishing a continuous loop to automate periodic web scraping. The <code>if __name__ == '__main__':</code> guard ensures the code executes only when the script is run directly, preventing execution if it is imported into another file as a module. Inside the infinite <code>while True</code> loop, the program calls <code>find_jobs()</code> to scrape current listings, logs a status update to the console, and then uses <code>time.sleep(time_wait * 60)</code> to delay execution for 10 minutes (600 seconds) before automatically repeating the process.</p>
+<pre><code>def find_jobs():
+    for index,job in enumerate(jobs):
+    company_name = job.find('h3', class_ = 'subtitle is-6 company').text
+    job_title = job.find('h2', class_ = 'title is-5').text
+    publish_date = job.find('p', class_ = 'is-small has-text-grey').text.strip() # strip method removes any blank spaces within a string.
+    apply_link = job.footer.find_all('a')[1]['href']
+
+    with open(f'python_job_postings/{index}.txt', 'w') as file:
+        file.write(f'Company Name: {company_name} \n')
+        file.write(f'Job Title: {job_title} \n')
+        file.write(f'Publish Date: {publish_date} \n')
+        file.write(f'Apply Link: {apply_link}')
+
+    print(' ') # Add a space between our outputs to make it neater
+
+if __name__ == '__main__':
+while True:
+    find_jobs()
+    time_wait = 10
+    print(f'Waiting {time_wait} minutes....')
+    time.sleep(time_wait * 60)
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2026-08-31 08:59:19.959063+00:00
+-->

@@ -53,7 +53,7 @@ This step initializes a `BeautifulSoup` object by passing the raw HTML string (`
     soup = BeautifulSoup(html_text, 'lxml')
 
 
-### Step 3: 
+### **Step 3: Search and Store job postings**
 
 This line searches the parsed soup object for all `<div>` elements containing the CSS class card-content and stores them as a list in the jobs variable. By isolating these specific HTML containers, it extracts every individual job post card from the page so they can be iterated over and parsed individually in subsequent code steps, where it will be discussed in the next step of this tutorial.
 
@@ -74,7 +74,7 @@ Once you have done that, navigate to the `<div>` element containing the CSS card
 
 ![Card Content Screenshot](images/card_content.png)
 
-### Step 4: iterate through job postings
+### **Step 4: iterate through job postings**
 
 We need to loop through each individual job within many jobs, hence the webpage. Like i said earlier we need to extract the company name, job title, apply link and publish date.
 
@@ -101,7 +101,7 @@ To target the "Apply" link specifically, the script navigates into the job card'
         publish_date = job.find('p', class_ = 'is-small has-text-grey').text.strip() # strip method removes any blank spaces within a string.
         apply_link = job.footer.find_all('a')[1]['href']
 
-### Step 5: Storing our data and writing it to a text-file
+### **Step 5: Storing our data and writing it to a text-file**
 
 To organize our output, each job posting is saved as an individual text file in a dedicated directory (python_job_postings/). Including the trailing forward slash directs Python to write inside that specific subfolder (/).
 
@@ -124,7 +124,7 @@ By embedding {index}.txt directly into the relative file path inside with open()
         print(' ') # Add a space between our outputs to make it neater
 
 
-### Step 6: Add a programme feature (Timer)
+### **Step 6: Add a programme feature (Timer)**
 
 The last step is to wrap this block of code into a function called find_jobs(), so that we are able to call it anywhere in the source code.
 
